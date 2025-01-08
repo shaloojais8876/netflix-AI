@@ -2,17 +2,10 @@ import { createBrowserRouter } from "react-router-dom";
 import Login from "./Login";
 import Browse from "./Browse";
 import { RouterProvider } from "react-router-dom";
-import { useEffect } from "react";
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from "../utils/firebase";
-import { useDispatch } from "react-redux";
-import { addUser, removeUser } from "../utils/userSlice";
+
 
 const Body = () => {
-   const dispatch = useDispatch();
-  
-
-   const appRouter = createBrowserRouter([
+  const appRouter = createBrowserRouter([
        {
          path: "/",
          element: <Login />,
@@ -22,31 +15,7 @@ const Body = () => {
          element: <Browse />,
       }
    ]);
-  //This useEffect is for cz i want to setup this type of eventListener(onAuthStateChanged) once!
-   useEffect(() => {
-      onAuthStateChanged(auth, (user) => {
-        if (user) {
-          //This if is excuted when the User Sign In or Sign Up
-          const { uid, email, displayName } = user;
-          dispatch
-          (addUser({
-             uid: uid,
-              email: email,
-               displayName: displayName,
-              })
-            );
-       } else {
-          // This is when the User is signed out!                                                            
-          dispatch(removeUser());
-       }
-    });
-   }, []);
-
-
-
-
-
-  return (
+ return (
     <div>
       <RouterProvider router={appRouter} />
     </div>

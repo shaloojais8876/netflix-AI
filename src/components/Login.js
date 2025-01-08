@@ -4,18 +4,18 @@ import { checkValidData } from "../utils/validate";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { updateProfile } from "firebase/auth";
+import { BG_IMG, USER_AVATAR } from "../utils/constants";
 
 
 const Login = () => {
-  const [isSignInForm, setSignInForm] = useState(true);
+  const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
-
+ 
+ 
   const name = useRef(null);
   const email = useRef(null);
   const password = useRef(null);
@@ -24,9 +24,9 @@ const Login = () => {
     //Validate the form data
     const message = checkValidData(email.current.value, password.current.value);
     setErrorMessage(message);
-    if(message) return;
+    if (message) return;
 
-    if(!isSignInForm) {
+    if (!isSignInForm) {
       // Sign Up Logic
       createUserWithEmailAndPassword(
         auth, 
@@ -39,26 +39,24 @@ const Login = () => {
 
       updateProfile(user, {
         displayName: name.current.value,
+        photoURL: USER_AVATAR,
       })
           .then(() => {
             // Profile updated!
-               const { uid, email, displayName } = auth.currentUser;
+               const { uid, email, displayName, photoURL } = auth.currentUser;
                         dispatch(
                          addUser({
                            uid: uid,
                             email: email,
                              displayName: displayName,
+                             photoURL: photoURL,
                             })
                           );
-            
-            navigate("/browse");
        })
           .catch((error) => {
             // An error occurred
             setErrorMessage(error.message);
        });
-          console.log(user);
-          navigate("/browse");
        })
        .catch((error) => {
          const errorCode = error.code;
@@ -75,8 +73,6 @@ const Login = () => {
        .then((userCredential) => {
          // Signed in 
          const user = userCredential.user;
-         console.log(user);
-         navigate("/browse");
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -87,13 +83,13 @@ const Login = () => {
   };
 
   const toggleSignInForm = () => {
-    setSignInForm(!isSignInForm);
+    setIsSignInForm(!isSignInForm);
   };
   return (
     <div>
        <Header />
        <div className="absolute">
-      <img src = "https://assets.nflxext.com/ffe/siteui/vlv3/2f5a878d-bbce-451b-836a-398227a34fbf/web/IN-en-20241230-TRIFECTA-perspective_5ab944a5-1a71-4f6d-b341-8699d0491edd_medium.jpg"
+      <img src = { BG_IMG }
       alt = "logo"
       />
      </div>
