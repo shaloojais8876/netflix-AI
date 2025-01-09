@@ -21,7 +21,10 @@ const useNowPlayingMovies = () => {
     };
   
     useEffect(() => {
-     !nowPlayingMovies && getNowPlayingMovies();
+      //if my now playing movies is not there then only make an api call
+      // (once the data is there then dont need to make an api call).{the concept of Memoization}
+      //In easy words these will only be called when my nowPlayingMovies not have the data.Once it hv it won't get call again n again!
+    !nowPlayingMovies && getNowPlayingMovies();
   
     }, []);
 };
