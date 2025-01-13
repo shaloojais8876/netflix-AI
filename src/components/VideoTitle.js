@@ -1,21 +1,32 @@
 import { FaPlay } from "react-icons/fa";
 import { GrCircleInformation } from "react-icons/gr";
 
-const VideoTitle = ({title, overview}) => {
+const VideoTitle = ({ title, overview }) => {
   return (
-     <div className="w-screen aspect-video pt-[20%] md:px-24 absolute text-white bg-gradient-to-r from-black" >
-       <h1 className="text-2xl md:text-6xl font-bold">{title}</h1>
-       <p className="hidden md:inline-block py-6 text-lg w-1/2">{overview}</p>
-     <div className="flex my-4">
-      <button className="bg-white text-black font-bold px-8 p-3 text-xl hover:bg-opacity-70 rounded-md flex items-center space-x-2">
-         <FaPlay />
-         <span>Play</span></button>
-      <button className="bg-gray-500 hover:bg-opacity-30 text-white font-bold px-9 mx-2 text-xl bg-opacity-50 rounded-md flex items-center space-x-2">
-        <GrCircleInformation />
-        <span>More Info</span></button>
-     </div>
+    <div className=" w-full absolute aspect-video pt-[20%] z-10 px-4 sm:px-8 md:px-16 lg:px-24 text-white bg-gradient-to-r from-black flex-wrap">
+      <div className=" hidden sm:block w-full h-full p-6 lg:p-12 flex flex-col space-y-4">
+        <h1 className=" hidden sm:block text-3xl md:text-5xl lg:text-6xl font-bold leading-tight">
+          {title}
+        </h1>
+        {overview && (
+          <p className="hidden sm:block text-base md:text-lg lg:text-xl max-w-2xl">
+            {overview}
+          </p>
+        )}
+        <div className="flex flex-wrap gap-4 ">
+          <button className=" bg-white text-black font-bold px-6 py-2 md:px-8 md:py-3 hover:bg-opacity-70 rounded-md flex items-center space-x-2">
+            <FaPlay  className="text-lg mr-2"/>
+            <span className="">Play</span>
+            
+          </button>
+          <button className="bg-gray-500 hover:bg-opacity-30 text-white font-bold px-7 py-2 md:px-9 md:py-3 bg-opacity-50 rounded-md flex items-center space-x-2">
+            <GrCircleInformation />
+            <span className="">More Info</span>
+          </button>
+        </div>
+      </div>
     </div>
-);
-  };
+  );
+};
 
 export default VideoTitle;
