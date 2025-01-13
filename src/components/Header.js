@@ -61,41 +61,47 @@ const Header = () => {
     }
           
     return (
-        <div className="absolute w-screen px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between">
-            <img className="w-44" 
-            src={LOGO} alt="logo"
-            />
-
-        {user && (
-            <div className="flex p-2">
-             
-             {showGptSearch && ( 
-              <select
-               className="  m-2 p-2 bg-gray-900 text-white" 
-               onChange={ handleLanguageChange }>
-               {SUPPORTED_LANG.map((lang) =>( 
-                <option key={lang.identifier}
-                value={lang.identifier}>
+      <div className="absolute top-0 w-full px-8 py-2 bg-gradient-to-b from-black z-20 flex flex-col md:flex-row md:justify-between flex-wrap">
+      <img className="w-44 mx-auto md:mx-0" src={LOGO} alt="logo" />
+    
+      {user && (
+        <div className="flex flex-col md:flex-row items-center p-2">
+          {showGptSearch && (
+            <select
+              className="m-2 p-2 bg-gray-900 text-white rounded-md md:w-auto"
+              onChange={handleLanguageChange}
+            >
+              {SUPPORTED_LANG.map((lang) => (
+                <option key={lang.identifier} value={lang.identifier}>
                   {lang.name}
-                  </option>
-                 ))}
-              </select>
-             )}
-              <button className="py-2 px-4 mx-4 my-2 bg-sky-500/50 text-white rounded-lg"
-              onClick={handleGptSearchClick}>
-                 {showGptSearch? "HomePage" : "AI Search"}
-              </button>
-              <img
+                </option>
+              ))}
+            </select>
+          )}
+                  
+
+          <button
+            className="py-2 px-5 md:mx-4 my-2 bg-sky-500/50 text-white rounded-lg w-full"
+            onClick={handleGptSearchClick}
+          >
+            {showGptSearch ? "HomePage" : "AISearch"}
+          </button>
+    
+          <button
+            onClick={handleSignOut}
+            className="py-2 px-4 md:mx-4 my-2 bg-sky-500/50 text-white rounded-lg w-full" 
+          >
+            Sign Out
+          </button>
+    
+          <img
             className="hidden md:block w-12 h-12"
             alt="usericon"
             src={user?.photoURL}
           />
-        
-            <button onClick={handleSignOut} className="font-bold text-white">(Sign Out)</button>      
-            </div>
-            )}
-        </div>
-    
+       </div>
+      )}
+    </div>
     );
-};
+  };
 export default Header;
