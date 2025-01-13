@@ -2,6 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
+
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -9,16 +10,16 @@ import { getAuth } from "firebase/auth";
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_KEY,
-  authDomain: "netflix-ai-d8689.firebaseapp.com",
-  projectId: "netflix-ai-d8689",
-  storageBucket: "netflix-ai-d8689.firebasestorage.app",
-  messagingSenderId: "119716515307",
-  appId: "1:119716515307:web:c95104fad0105dcb801dae",
-  measurementId: "G-DJ3GF1RPW4"
+  authDomain: "netflixai-a37a8.firebaseapp.com",
+  projectId: "netflixai-a37a8",
+  storageBucket: "netflixai-a37a8.firebasestorage.app",
+  messagingSenderId: "1017921074923",
+  appId: "1:1017921074923:web:533ffaa5ea9aafbaeab0ae",
+  measurementId: "G-8CWVYTZF2B"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 
- export const auth = getAuth();
+export const auth = getAuth();
